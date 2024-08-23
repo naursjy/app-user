@@ -22,7 +22,8 @@ class AuthController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required',
-            'confirm_password' => 'required|same:password'
+            'confirm_password' => 'required|same:password',
+            'roles' => 'required|string|in:admin,superadmin',
         ]);
 
         if ($validator->fails()) {
@@ -41,47 +42,16 @@ class AuthController extends Controller
 
         $success['email'] = $user->email;
         $success['name'] = $user->name;
+        $success['roles'] =  $user->roles;
 
-        // $artikel = new M_artikel;
-        // $artikel->judul_artikel = 'perkembangan daya ingat';
-        // $artikel->isi_artikel = 'akankah ini berhasil';
-        // $artikel->tanggal = date('Y-m-d', strtotime($request->tanggal));
-        // $artikel->user_id = $user->id;
+
         return response()->json([
             'success' => true,
             'message' => 'Register Berhasil',
             'data' => $success,
-            // $artikel
+
         ]);
     }
-
-    // public function register(Request $request)
-    // {
-    //     $validatedData = $request->validate([
-    //         'name' => 'required|string',
-    //         'email' => 'required|email|unique:users',
-    //         'password' => 'required|confirmed',
-    //         'password_confirmation' => 'required',
-    //     ]);
-
-    //     $user = User::create([
-    //         'name' => $validatedData['name'],
-    //         'email' => $validatedData['email'],
-    //         'password' => Hash::make($validatedData['password']),
-    //     ]);
-
-    //     // Associate an article with the newly created user
-    //     $article = new M_artikel();
-    //     $article->judul_artikel = $request->judul_artikel;
-    //     $article->user_id = $user->id;
-    //     $article->save();
-
-    //     return response()->json([
-    //         'success' => true,
-    //         'message' => 'Register Berhasil',
-    //         'data' => $user
-    //     ]);
-    // }
 
     public function Login(Request $request)
     {
@@ -115,4 +85,16 @@ class AuthController extends Controller
         $users = User::all();
         return response()->json($users);
     }
+
+    public function user(Request $request)
+    {
+        return response()->json(Auth::user());
+    }
+
+    // public function logout(Request $request)
+    // {
+    //     $request->user()->tokens()->delete();
+
+    //     return response()->json(['message' => 'Logged out successfully']);
+    // }
 }

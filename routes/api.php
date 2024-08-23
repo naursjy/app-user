@@ -27,6 +27,12 @@ Route::post('register', [AuthController::class, 'Register']);
 Route::post('login', [AuthController::class, 'Login']);
 Route::post('logout', [AuthController::class, 'Logout'])->middleware('auth:sanctum');
 
+
+// Route::group(['middleware' => 'auth:sanctum'], function () {
+//     Route::get('/admin-only', [BeritaController::class, 'DataView'])->middleware('roles:superadmin,admin');
+//     Route::post('/superadmin-only', [BeritaController::class, 'InsertBerita'])->middleware('roles:superadmin');
+// });
+
 // Route::get('login', function () {
 //     $user = User::find(1);
 //     $role = M_Roles::find(1);
@@ -60,13 +66,13 @@ Route::post('/update-artikel/{id}', [ArtikelController::class, 'UpdateArtikel'])
 //rotue Berita
 Route::get('/berita', [BeritaController::class, 'DataView']);
 Route::post('/insert-berita', [BeritaController::class, 'InsertBerita'])
-    ->middleware('auth:sanctum');
+    ->middleware('auth:sanctum', 'roles:superadmin');
 Route::get('/detail-artikel/{id}', [BeritaController::class, 'Detail_Berita'])
     ->middleware('auth:sanctum');
 Route::post('/update-berita/{id}', [BeritaController::class, 'UpdateBerita'])
-    ->middleware('auth:sanctum');
+    ->middleware('auth:sanctum', 'roles:superadmin');
 Route::get('/deleted-berita/{id}', [BeritaController::class, 'DeleteBerita'])
-    ->middleware('auth:sanctum');
+    ->middleware('auth:sanctum', 'roles:superadmin');
 
 
 //Route Roles

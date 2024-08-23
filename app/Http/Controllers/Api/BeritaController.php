@@ -66,9 +66,11 @@ class BeritaController extends Controller
     public function UpdateBerita(Request $request)
     {
         $user = Auth::user();
-        if ($user->id !== 1) { // hanya user_id 1 yang bisa CUD
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
+        // if ($user->id !== 1) { // hanya user_id 1 yang bisa CUD
+        //     return response()->json(['error' => 'Unauthorized'], 401);
+        // }
+
+        //masih mencari cara untuk menentukan superadmin dan admin
 
         $validator = Validator::make($request->all(), [
             'image'     => 'image|mimes:jpeg,png,jpg,gif,svg',
