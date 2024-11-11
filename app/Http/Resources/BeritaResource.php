@@ -21,13 +21,13 @@ class BeritaResource extends JsonResource
      * @param  mixed $resource
      * @return void
      */
-    public function __construct($active, $status, $message, $resource)
-    {
-        parent::__construct($resource);
-        $this->status  = $status;
-        $this->message = $message;
-        $this->active = $active;
-    }
+    // public function __construct($active, $status, $message, $resource)
+    // {
+    //     parent::__construct($resource);
+    //     $this->status  = $status;
+    //     $this->message = $message;
+    //     $this->active = $active;
+    // }
 
     /**
      * Transform the resource into an array.
@@ -35,13 +35,23 @@ class BeritaResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function toArray($request)
+    // public function toArray($request)
+    // {
+    //     return [
+    //         'active'    => $this->active,
+    //         'success'   => $this->status,
+    //         'message'   => $this->message,
+    //         'data'      => $this->resource,
+    //     ];
+    // }
+    public function toArray(Request $request)
     {
         return [
-            'active'    => $this->active,
-            'success'   => $this->status,
-            'message'   => $this->message,
-            'data'      => $this->resource,
+            'image' => $this->image,
+            'judul' => $this->title,
+            'isi' => $this->content,
+            'sub' => $this->subsubtitle,
+            'cat_name' => $this->user ? ($this->user->name ?? null) : null,
         ];
     }
 }

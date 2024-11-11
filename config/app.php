@@ -211,5 +211,9 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
+    'aliases' => [
+        // ...
+        'Redis' => Illuminate\Support\Facades\Redis::class,
+    ],
 
 ];

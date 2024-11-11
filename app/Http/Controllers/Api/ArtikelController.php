@@ -14,7 +14,8 @@ class ArtikelController extends Controller
     public function DataArtikel()
     {
 
-        $data = M_artikel::with('user_id')->get();
+        // $data = M_artikel::with('user_id')->get();
+        $data = M_artikel::all();
 
         return response()->json([
             'success' => true,

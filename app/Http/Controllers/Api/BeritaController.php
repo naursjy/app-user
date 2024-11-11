@@ -22,11 +22,12 @@ class BeritaController extends Controller
 
     public function DataView()
     {
-        $post = M_Berita::select('id', 'title', 'subtitle', 'content', 'image', 'user_id')
-            ->with('user')
+        $post = M_Berita::with('user')
             ->latest()
-            ->paginate(5);
-        return new BeritaResource('Its Can Work', true, 'List Data Berita', $post);
+            ->get();
+        return BeritaResource::collection($post);
+        // ::select('id', 'title', 'subtitle', 'content', 'image', 'user_id')
+        // return new BeritaResource('Its Can Work', true, 'List Data Berita', $post);
     }
 
     public function InsertBerita(Request $request)

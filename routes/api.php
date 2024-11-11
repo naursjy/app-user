@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Api\ArtikelController;
 use App\Http\Controllers\Api\BeritaController;
 use App\Http\Controllers\Api\RolesController;
+use App\Http\Controllers\PengaduanController;
 use App\Http\Resources\BeritaResource;
 use App\Models\M_Roles;
 use GuzzleHttp\Middleware;
@@ -83,3 +84,11 @@ Route::post('/update-roles/{id}', [RolesController::class, 'UpdateRoules'])
     ->middleware('auth:sanctum');
 Route::get('/deleteroles/{id}', [RolesController::class, 'DeleteRoules'])
     ->middleware('auth:sanctum');
+
+
+Route::post('/store', [PengaduanController::class, 'store']);
+// Route::post('/insert', [PengaduanController::class, 'insert']);
+
+Route::get('/pengaduan', [PengaduanController::class, 'index']);
+Route::post('/pengaduan/{id}/approve', [PengaduanController::class, 'approvePengaduan']);
+Route::post('/pengaduan/{id}', [PengaduanController::class, 'approvePengaduan']);
